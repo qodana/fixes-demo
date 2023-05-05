@@ -17,19 +17,19 @@ jobs:
           registry: registry.jetbrains.team
           username: ${{ secrets.SPACE_REGISTRY_USERNAME }}
           password: ${{ secrets.SPACE_REGISTRY_PASSWORD }}
-      - run: docker pull registry.jetbrains.team/p/sa/containers/qodana-jvm:latest
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2023.1.0
+        uses: JetBrains/qodana-action@main
         with:
-          args: --skip-pull
+          pr-mode: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
-      - name: push
-        uses: actions-x/commit@v6 
+      - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          email: bot@qodana.cloud
-          name: Qodana Bot
-          message: 🤖 Applied fixes by Qodana
+          commit_message: 🤖 Applied fixes by Qodana
+          commit_user_name: Qodana Bot
+          commit_user_email: bot@qodana.cloud
+          commit_author: Qodana <bot@qodana.cloud>
+
