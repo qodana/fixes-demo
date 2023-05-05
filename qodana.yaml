@@ -1,0 +1,4 @@
+linter: registry.jetbrains.team/p/sa/containers/qodana-jvm:latest
+fixesStrategy: apply
+profile:
+  name: qodana.single:IncorrectFormatting
